@@ -10,9 +10,7 @@ limite_saque = 500
 numero_de_saques = 0
 limite_de_saques = 3
 extrato = []
-"""
-Exibir todos os saques e no final de tudo exibir o valor atual da conta R$
-"""
+
 
 while True:
 
