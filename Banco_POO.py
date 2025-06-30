@@ -33,19 +33,19 @@ class Conta():
     
     @property
     def saldo(self):
-        return self._saldo
+        return self.__saldo
     
     @property
     def numero(self):
-        return self._numero
+        return self.__numero
 
     @property
     def agencia(self):
-        return self._agencia
+        return self.__agencia
     
     @property
     def cliente(self):
-        return self._cliente
+        return self.__cliente
     
     @property
     def historico(self):
