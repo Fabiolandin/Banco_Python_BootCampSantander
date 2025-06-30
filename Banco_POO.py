@@ -10,7 +10,7 @@ class Cliente:
         transacao.registrar(conta)
 
     def adicionar_conta(self, conta):
-        self.contas.append(conta)
+        self.__contas.append(conta)
 
 class PessoaFisica(Cliente):
     def __init__(self, endereco, conta, cpf, nome, data_nascimento):
@@ -18,6 +18,18 @@ class PessoaFisica(Cliente):
         self.__cpf = cpf
         self.__nome = nome
         self.__data_nascimento = data_nascimento
+
+    @property
+    def cpf(self):
+        return self.__cpf
+
+    @property
+    def nome(self):
+        return self.__nome
+
+    @property
+    def data_nascimento(self):
+        return self.__data_nascimento
 
 class Conta():
     def __init__(self, numero, cliente):
@@ -57,9 +69,10 @@ class Conta():
 
         if excedeu_saldo:
             print("\n @@@ Operação falhou! Você não tem saldo suficiente '_' ")
+            return False
         
         elif valor > 0:
-            self._saldo -= valor
+            self.__saldo -= valor
             print("\n === Saque realizado com sucesso!!!")
             return True
         
@@ -70,7 +83,7 @@ class Conta():
     
     def depositar(self, valor):
         if valor > 0:
-            self._saldo += valor
+            self.__saldo += valor
             print("\n === Depósito realizado com sucesso!!!")
         else:
             print("\n @@@ Operação falhou! '_' ")
@@ -83,6 +96,14 @@ class ContaCorrente(Conta):
         super().__init__(saldo, numero, agencia, cliente, historico)
         self.__limite = limite
         self.__limite_saques = limite_saques
+    
+    @property
+    def limite(self):
+        return self.__limite
+
+    @property
+    def limite_saques(self):
+        return self.__limite_saques
     
     def sacar(self, valor):
         numero_saques = len([transcao for transacao in self.historico.transacoes if transacao["tipo"] == Saque.__name__]
@@ -123,7 +144,7 @@ class Historico:
                 "tipo": transacao.__class__.__name__,
                 "valor": transacao.valor,
                 "data": datetime.now().strftime
-                ("%d-%m%Y %H:%M:%s"),
+                ("%d-%m-%Y %H:%M:%s"),
             }
 
         )
